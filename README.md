@@ -49,14 +49,14 @@ Create a `.env` file in the project root:
 ```env
 # MongoDB Configuration
 MONGO_PORT=27017
-MONGO_INITDB_ROOT_USERNAME=admin
-MONGO_INITDB_ROOT_PASSWORD=password123
+MONGO_INITDB_ROOT_USERNAME=your-username
+MONGO_INITDB_ROOT_PASSWORD=your-password
 
 # MinIO Configuration
 MINIO_PORT=9000
 MINIO_CONSOLE_PORT=9001
-MINIO_ROOT_USER=minioadmin
-MINIO_ROOT_PASSWORD=minioadmin123
+MINIO_ROOT_USER=your-username
+MINIO_ROOT_PASSWORD=your-password
 ```
 
 ### 2. Start All Services
@@ -478,7 +478,7 @@ docker-compose up -d --scale backend=3
 
 ## 👨‍💻 Developer
 
-**DANENTANG** (GIUAKI-22IT165)
+**ME**
 
 ---
 
