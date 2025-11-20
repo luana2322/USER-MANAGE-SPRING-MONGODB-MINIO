@@ -1,30 +1,42 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_crud/main.dart';
+import 'package:flutter_crud/main.dart'; // Đường dẫn tới main.dart
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('Counter Widget Tests', () {
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+      // Render toàn bộ app
+      await tester.pumpWidget(const MyApp());
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      // Kiểm tra giá trị ban đầu
+      expect(find.text('0'), findsOneWidget);
+      expect(find.text('1'), findsNothing);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      // Nhấn nút + 1 lần
+      await tester.tap(find.byIcon(Icons.add));
+      await tester.pumpAndSettle(); // đảm bảo widget tree update xong
+
+      // Kiểm tra counter đã tăng
+      expect(find.text('0'), findsNothing);
+      expect(find.text('1'), findsOneWidget);
+    });
+
+    testWidgets('Counter increments twice', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+
+      // Kiểm tra giá trị ban đầu
+      expect(find.text('0'), findsOneWidget);
+
+      // Nhấn nút + hai lần
+      await tester.tap(find.byIcon(Icons.add));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byIcon(Icons.add));
+      await tester.pumpAndSettle();
+
+      // Kiểm tra counter = 2
+      expect(find.text('0'), findsNothing);
+      expect(find.text('2'), findsOneWidget);
+    });
   });
 }
